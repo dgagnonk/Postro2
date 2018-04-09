@@ -18,6 +18,8 @@ namespace Postro2
 
         private string guid;
 
+        private Condition condition;
+
 
         // This constructor is used if a poster is being edited
         public frmInfo(string postertitle, Condition condition, string id, int count)
@@ -25,7 +27,10 @@ namespace Postro2
             InitializeComponent();
 
             txtTitle.Text = postertitle;
+
+            this.condition = condition;
             lstCondition.SelectedIndex = (int)condition;
+            
             nudCount.Value = count;
             lblID.Text = "ID: " + id;
             guid = id;
@@ -68,11 +73,6 @@ namespace Postro2
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;   
-        }
-
-        private void frmInfo_Load(object sender, EventArgs e)
-        {
-            lstCondition.SelectedIndex = 2;
         }
     }
 }

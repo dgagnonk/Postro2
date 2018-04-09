@@ -13,6 +13,16 @@ namespace Postro2
 {
     public partial class frmMain : Form
     {
+        /*
+         * List generation cleaner (1)
+         * Auto email send (3)
+         * Holds (2)
+         * Pricing (for special edition posters and stuff) (3)
+         * Online database
+         * Bug: quality doesn't update when editing poster (combobox should read existing poster's quality) (1)
+         * Add sell to client list and button on main screen (3)
+         */
+
 
         DataSet dataset;
         string databasename = "posters.sqlite";

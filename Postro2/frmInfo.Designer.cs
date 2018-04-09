@@ -147,7 +147,6 @@
             this.MaximizeBox = false;
             this.Name = "frmInfo";
             this.Text = "Poster Info";
-            this.Load += new System.EventHandler(this.frmInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
