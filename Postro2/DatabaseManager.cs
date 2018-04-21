@@ -87,7 +87,7 @@ namespace Postro2
         {
             try
             {
-                Command(string.Format("INSERT INTO Posters (PosterTitle, Condition, Count, ID, Holds, Price) VALUES ('{0}', '{1}', {2}, '{3}', {4}, {5});", poster.Title, Poster.ConditionToString(poster.PosterCondition), poster.Count.ToString(), poster.ID, poster.Holds.ToString(), poster.Pricing));
+                Command(string.Format("INSERT INTO Posters (PosterTitle, Condition, Count, ID, Holds, Price) VALUES ('{0}', '{1}', {2}, '{3}', {4}, {5});", poster.Title, Poster.ConditionToString(poster.PosterCondition), poster.Count.ToString(), poster.ID, poster.Holds.ToString(), poster.Pricing * 100));
             }
             catch (Exception)
             {

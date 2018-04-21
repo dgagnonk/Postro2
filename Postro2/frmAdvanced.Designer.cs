@@ -30,8 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lnkDelete = new System.Windows.Forms.LinkLabel();
-            this.lnkDump = new System.Windows.Forms.LinkLabel();
-            this.btnDump = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gbInclude = new System.Windows.Forms.GroupBox();
@@ -53,8 +51,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lnkDelete);
-            this.groupBox1.Controls.Add(this.lnkDump);
-            this.groupBox1.Controls.Add(this.btnDump);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Location = new System.Drawing.Point(12, 262);
             this.groupBox1.Name = "groupBox1";
@@ -67,7 +63,7 @@
             // 
             this.lnkDelete.AutoSize = true;
             this.lnkDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkDelete.Location = new System.Drawing.Point(314, 98);
+            this.lnkDelete.Location = new System.Drawing.Point(218, 94);
             this.lnkDelete.Name = "lnkDelete";
             this.lnkDelete.Size = new System.Drawing.Size(94, 21);
             this.lnkDelete.TabIndex = 3;
@@ -75,31 +71,9 @@
             this.lnkDelete.Text = "What\'s this?";
             this.lnkDelete.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDelete_LinkClicked);
             // 
-            // lnkDump
-            // 
-            this.lnkDump.AutoSize = true;
-            this.lnkDump.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkDump.Location = new System.Drawing.Point(102, 98);
-            this.lnkDump.Name = "lnkDump";
-            this.lnkDump.Size = new System.Drawing.Size(94, 21);
-            this.lnkDump.TabIndex = 2;
-            this.lnkDump.TabStop = true;
-            this.lnkDump.Text = "What\'s this?";
-            this.lnkDump.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDump_LinkClicked);
-            // 
-            // btnDump
-            // 
-            this.btnDump.Location = new System.Drawing.Point(51, 49);
-            this.btnDump.Name = "btnDump";
-            this.btnDump.Size = new System.Drawing.Size(194, 46);
-            this.btnDump.TabIndex = 1;
-            this.btnDump.Text = "Dump Database";
-            this.btnDump.UseVisualStyleBackColor = true;
-            this.btnDump.Click += new System.EventHandler(this.btnDump_Click);
-            // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(263, 49);
+            this.btnDelete.Location = new System.Drawing.Point(167, 45);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(194, 46);
             this.btnDelete.TabIndex = 0;
@@ -282,8 +256,6 @@
         private System.Windows.Forms.RadioButton optFullList;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.LinkLabel lnkDelete;
-        private System.Windows.Forms.LinkLabel lnkDump;
-        private System.Windows.Forms.Button btnDump;
         private System.Windows.Forms.GroupBox gbInclude;
         private System.Windows.Forms.CheckBox chkID;
         private System.Windows.Forms.CheckBox chkHolds;

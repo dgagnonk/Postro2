@@ -60,7 +60,7 @@ namespace Postro2
             lblStatus.ForeColor = Color.Green;
             lblStatus.Text = "Connected to database";
 
-            DatabaseManager.Command("CREATE TABLE IF NOT EXISTS Posters (PosterTitle VARCHAR(255), Condition VARCHAR(70), Count INT, ID VARCHAR(255), Holds INT, Price MONEY);");
+            DatabaseManager.Command("CREATE TABLE IF NOT EXISTS Posters (PosterTitle VARCHAR(255), Condition VARCHAR(70), Count INT, ID VARCHAR(255), Holds INT, Price INT);");
 
             dgvData.SelectionChanged += DgvData_SelectionChanged;
             txtSearch.GotFocus += TxtSearch_GotFocus;
@@ -90,7 +90,7 @@ namespace Postro2
             while (await reader.ReadAsync())
             {
                 // 1: title -- 2: condition -- 3: count -- 4: ID -- 5: Holds -- 6: Price        
-                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), reader.GetValue(5) });
+                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), int.Parse(reader.GetValue(5).ToString()) / 100f });
             }
         }
 
@@ -101,7 +101,7 @@ namespace Postro2
             while (await reader.ReadAsync())
             {
                 // 1: title -- 2: condition -- 3: count -- 4: ID -- 5: Holds -- 6: Price        
-                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), reader.GetValue(5) });
+                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), int.Parse(reader.GetValue(5).ToString()) / 100f });
             }
         }
 
@@ -162,7 +162,7 @@ namespace Postro2
 
         private void btnEditSelected_Click(object sender, EventArgs e)
         {
-            // data row: title, condition, count, id
+            // data row: title, condition, count, id, holds, price
 
             if (dgvData.SelectedRows.Count > 0)
             {
@@ -170,6 +170,7 @@ namespace Postro2
                 string id = dgvData.SelectedCells[3].Value.ToString();
                 string condition = dgvData.SelectedCells[1].Value.ToString();
                 int count = int.Parse(dgvData.SelectedCells[2].Value.ToString());
+                double price = double.Parse(dgvData.SelectedCells[5].Value.ToString());
 
                 Console.WriteLine(title);
                 Console.WriteLine(condition);
@@ -177,16 +178,16 @@ namespace Postro2
                 Console.WriteLine(id);
 
 
-                frmInfo info = new Postro2.frmInfo(title, Poster.StringToCondition(condition), id, count);
+                frmInfo info = new Postro2.frmInfo(title, Poster.StringToCondition(condition), id, count, price);
 
                 if (info.ShowDialog() != DialogResult.OK) return;
                 Poster poster = info._Poster;
 
                 Console.WriteLine(poster.ToString());
 
-                // PosterTitle, Condition, Count, ID
-                DatabaseManager.Command(string.Format("UPDATE Posters SET PosterTitle=\"{0}\", Condition=\"{1}\", Count={2} WHERE ID=\"{3}\";",
-                                                        poster.Title, Poster.ConditionToString(poster.PosterCondition), poster.Count, poster.ID));
+                // PosterTitle, Condition, Count, ID, Holds, Price
+                DatabaseManager.Command(string.Format("UPDATE Posters SET PosterTitle=\"{0}\", Condition=\"{1}\", Count={2}, Price={4} WHERE ID=\"{3}\";",
+                                                        poster.Title, Poster.ConditionToString(poster.PosterCondition), poster.Count, poster.ID, (poster.Pricing * 100)));
 
                 DisplayAllRows();
 

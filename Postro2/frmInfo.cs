@@ -22,7 +22,7 @@ namespace Postro2
 
 
         // This constructor is used if a poster is being edited
-        public frmInfo(string postertitle, Condition condition, string id, int count)
+        public frmInfo(string postertitle, Condition condition, string id, int count, double price)
         {
             InitializeComponent();
 
@@ -36,16 +36,17 @@ namespace Postro2
             nudCount.Value = count;
             lblID.Text = "ID: " + id;
             guid = id;
+            txtPricing.Text = price.ToString();
         }
 
         //DOESN'T WORK
         private void TxtPricing_LostFocus(object sender, EventArgs e)
         {
-            double value;
-            if (Double.TryParse(txtPricing.Text, out value))
-                txtPricing.Text = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:C2}", value);
-            else
-                txtPricing.Text = string.Empty;
+            //double value;
+            //if (Double.TryParse(txtPricing.Text, out value))
+            //    txtPricing.Text = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:C2}", value);
+            //else
+            //    txtPricing.Text = string.Empty;
         }
 
         // This constructor is used if it's a new poster being added
@@ -55,6 +56,9 @@ namespace Postro2
 
             guid = Guid.NewGuid().ToString();
             lblID.Text = "ID: " + guid;
+            lstCondition.SelectedIndex = 1;
+
+            txtPricing.LostFocus += TxtPricing_LostFocus;
 
             nudCount.Value = 1;
         }
@@ -78,7 +82,7 @@ namespace Postro2
                 lstCondition.SelectedIndex = 2;
             }
 
-            poster = new Poster(txtTitle.Text, (Condition)lstCondition.SelectedIndex, guid, (int)nudCount.Value, 0, Convert.ToDouble(txtPricing.Text));
+            poster = new Poster(txtTitle.Text, (Condition)lstCondition.SelectedIndex, guid, (int)nudCount.Value, 0, double.Parse(txtPricing.Text));
             this.DialogResult = DialogResult.OK;
         }
 

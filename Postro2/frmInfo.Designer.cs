@@ -100,6 +100,11 @@
             this.nudCount.Name = "nudCount";
             this.nudCount.Size = new System.Drawing.Size(120, 33);
             this.nudCount.TabIndex = 5;
+            this.nudCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btnOK
             // 
@@ -145,6 +150,7 @@
             this.txtPricing.Name = "txtPricing";
             this.txtPricing.Size = new System.Drawing.Size(120, 33);
             this.txtPricing.TabIndex = 10;
+            this.txtPricing.Text = "10";
             // 
             // label5
             // 
