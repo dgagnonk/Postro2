@@ -16,5 +16,5 @@ C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.ex
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.pdb
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmMain.resources
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmInfo.resources
-C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmAdvanced.resources
+C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmDevConsole.resources

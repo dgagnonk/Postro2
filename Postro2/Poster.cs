@@ -19,14 +19,19 @@ namespace Postro2
         public int Count { get; set; }
         public string Title { get; set; }
 
+        public int Holds { get; set; }
+        public double Pricing { get; set; }
+
         public string ID { get { return _ID; } }
         private string _ID;
 
-        public Poster(string title, Condition condition, string id, int count = 1)
+        public Poster(string title, Condition condition, string id, int count = 1, int holds = 0, double pricing = 10.0f)
         {
             this.Title = title;
             this.Count = count;
             this.PosterCondition = condition;
+            this.Holds = holds;
+            this.Pricing = pricing;
 
             _ID = id;
         }

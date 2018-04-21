@@ -30,10 +30,22 @@ namespace Postro2
 
             this.condition = condition;
             lstCondition.SelectedIndex = (int)condition;
-            
+
+            txtPricing.LostFocus += TxtPricing_LostFocus;
+
             nudCount.Value = count;
             lblID.Text = "ID: " + id;
             guid = id;
+        }
+
+        //DOESN'T WORK
+        private void TxtPricing_LostFocus(object sender, EventArgs e)
+        {
+            double value;
+            if (Double.TryParse(txtPricing.Text, out value))
+                txtPricing.Text = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:C2}", value);
+            else
+                txtPricing.Text = string.Empty;
         }
 
         // This constructor is used if it's a new poster being added
@@ -66,7 +78,7 @@ namespace Postro2
                 lstCondition.SelectedIndex = 2;
             }
 
-            poster = new Poster(txtTitle.Text, (Condition)lstCondition.SelectedIndex, guid, (int)nudCount.Value);
+            poster = new Poster(txtTitle.Text, (Condition)lstCondition.SelectedIndex, guid, (int)nudCount.Value, 0, Convert.ToDouble(txtPricing.Text));
             this.DialogResult = DialogResult.OK;
         }
 

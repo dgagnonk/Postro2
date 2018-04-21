@@ -21,8 +21,14 @@ namespace Postro2
          * Online database
          * Bug: quality doesn't update when editing poster (combobox should read existing poster's quality) (1)
          * Add sell to client list and button on main screen (3)
+         * Update server
          */
 
+
+        /* TODO:
+         * Pricing on edit window
+         * Be able to add holds
+         */
 
         DataSet dataset;
         string databasename = "posters.sqlite";
@@ -54,7 +60,7 @@ namespace Postro2
             lblStatus.ForeColor = Color.Green;
             lblStatus.Text = "Connected to database";
 
-            DatabaseManager.Command("CREATE TABLE IF NOT EXISTS Posters (PosterTitle VARCHAR(255), Condition VARCHAR(70), Count INT, ID VARCHAR(255));");
+            DatabaseManager.Command("CREATE TABLE IF NOT EXISTS Posters (PosterTitle VARCHAR(255), Condition VARCHAR(70), Count INT, ID VARCHAR(255), Holds INT, Price MONEY);");
 
             dgvData.SelectionChanged += DgvData_SelectionChanged;
             txtSearch.GotFocus += TxtSearch_GotFocus;
@@ -83,8 +89,8 @@ namespace Postro2
             DbDataReader reader = await DatabaseManager.CommandWithReader("SELECT * FROM Posters ORDER BY PosterTitle ASC");
             while (await reader.ReadAsync())
             {
-                // 1: title -- 2: condition -- 3: count -- 4: ID           
-                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1).ToString(), reader.GetValue(2), reader.GetValue(3) });
+                // 1: title -- 2: condition -- 3: count -- 4: ID -- 5: Holds -- 6: Price        
+                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), reader.GetValue(5) });
             }
         }
 
@@ -94,8 +100,8 @@ namespace Postro2
             DbDataReader reader = await DatabaseManager.CommandWithReader(string.Format("SELECT * FROM Posters WHERE PosterTitle LIKE '%{0}%'", searchterm));
             while (await reader.ReadAsync())
             {
-                // 1: title -- 2: condition -- 3: count -- 4: ID           
-                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3) });
+                // 1: title -- 2: condition -- 3: count -- 4: ID -- 5: Holds -- 6: Price        
+                dgvData.Rows.Add(new object[] { reader.GetValue(0), reader.GetValue(1), reader.GetValue(2), reader.GetValue(3), reader.GetValue(4), reader.GetValue(5) });
             }
         }
 

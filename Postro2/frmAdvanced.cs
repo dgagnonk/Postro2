@@ -47,44 +47,75 @@ namespace Postro2
             
         }
 
+        private string AssembleQueryColString(List<string> columns)
+        {
+            string ret = columns[0];
+            if (columns.Count >= 2)
+            {
+                for (int i = 1; i < columns.Count; i++)
+                {
+                    ret += (", " + columns[i]);
+                }
+            }
+
+            return ret;
+        }
+
         private async void btnGenerate_Click(object sender, EventArgs e)
         {
+            bool _continue = false;
+
+            foreach(Control c in gbInclude.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    if (((CheckBox)c).Checked) _continue = true;
+                }
+            }
+
+            if (!_continue)
+            {
+                MessageBox.Show("At least 1 field must be included to generate a list.", "Include", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string list = "";
+            string query = "";
+            List<string> queryColumns = new List<string>();
 
-            if (optFullList.Checked)
-            {
-                DbDataReader reader = await DatabaseManager.CommandWithReader("SELECT * FROM Posters ORDER BY PosterTitle;");
-                while (await reader.ReadAsync())
+            if (optFullList.Checked) query = "SELECT [QUERYCOLS] FROM Posters ORDER BY PosterTitle;";
+            else if(optAboveZero.Checked) query = "SELECT [QUERYCOLS] FROM Posters WHERE Count > 0 ORDER BY PosterTitle;";
+
+            if (chkTitle.Checked) queryColumns.Add("PosterTitle");
+            if (chkCondition.Checked) queryColumns.Add("Condition");
+            if (chkCount.Checked) queryColumns.Add("Count");
+            if (chkID.Checked) queryColumns.Add("ID");
+            if (chkHolds.Checked) queryColumns.Add("Holds");
+            if (chkPrice.Checked) queryColumns.Add("Price");
+
+            string finalQueryColumns = AssembleQueryColString(queryColumns);
+            query = query.Replace("[QUERYCOLS]", finalQueryColumns);
+
+            DbDataReader reader = await DatabaseManager.CommandWithReader(query);
+
+            while(await reader.ReadAsync())
+            {              
+                int counter = 0;
+                foreach(string col in queryColumns)
                 {
-                    // 1: title -- 2: condition -- 3: count -- 4: ID     
-
-                    list += reader.GetValue(0).ToString() + " -- [Count: " + reader.GetValue(2).ToString() + "]" + Environment.NewLine;
-
+                    list += (col + ": " + reader.GetValue(counter) + Environment.NewLine);
+                    counter++;
                 }
 
-                SaveFileDialog sfs = new SaveFileDialog();
-                sfs.Filter = "Text files (*.txt)|*.txt";
-                if (sfs.ShowDialog() == DialogResult.Cancel) return;
-
-                File.WriteAllText(sfs.FileName, list);
+                list += "------------------------------------------" + Environment.NewLine;
             }
-            else if (optAboveZero.Checked)
-            {
-                DbDataReader reader = await DatabaseManager.CommandWithReader("SELECT * FROM Posters WHERE Count > 0 ORDER BY PosterTitle;");
-                while (await reader.ReadAsync())
-                {
-                    // 1: title -- 2: condition -- 3: count -- 4: ID     
 
-                    list += reader.GetValue(0).ToString() + Environment.NewLine;
+            SaveFileDialog sfs = new SaveFileDialog();
+            sfs.Filter = "Text files (*.txt)|*.txt";
+            if (sfs.ShowDialog() == DialogResult.Cancel) return;
 
-                }
+            File.WriteAllText(sfs.FileName, list);
 
-                SaveFileDialog sfs = new SaveFileDialog();
-                sfs.Filter = "Text files (*.txt)|*.txt";
-                if (sfs.ShowDialog() == DialogResult.Cancel) return;
-
-                File.WriteAllText(sfs.FileName, list);
-            }
         }
 
         private async void btnDump_Click(object sender, EventArgs e)
@@ -105,6 +136,11 @@ namespace Postro2
             if (sfs.ShowDialog() == DialogResult.Cancel) return;
 
             File.WriteAllText(sfs.FileName, list);
+        }
+
+        private void lnkConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            (new frmDevConsole()).Show();
         }
     }
 }
