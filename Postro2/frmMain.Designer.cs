@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dgvData = new System.Windows.Forms.DataGridView();
+            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHolds = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.btnEditSelected = new System.Windows.Forms.Button();
@@ -41,12 +47,6 @@
             this.lnkIcons8 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdvanced = new System.Windows.Forms.Button();
-            this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHolds = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +75,49 @@
             this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(664, 445);
             this.dgvData.TabIndex = 0;
+            // 
+            // colTitle
+            // 
+            this.colTitle.HeaderText = "Title";
+            this.colTitle.Name = "colTitle";
+            this.colTitle.ReadOnly = true;
+            this.colTitle.Width = 70;
+            // 
+            // colCondition
+            // 
+            this.colCondition.HeaderText = "Condition";
+            this.colCondition.Name = "colCondition";
+            this.colCondition.ReadOnly = true;
+            this.colCondition.Width = 115;
+            // 
+            // colCount
+            // 
+            this.colCount.HeaderText = "Count";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            this.colCount.Width = 85;
+            // 
+            // colID
+            // 
+            this.colID.HeaderText = "ID";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Visible = false;
+            this.colID.Width = 52;
+            // 
+            // colHolds
+            // 
+            this.colHolds.HeaderText = "Holds";
+            this.colHolds.Name = "colHolds";
+            this.colHolds.ReadOnly = true;
+            this.colHolds.Width = 84;
+            // 
+            // colPrice
+            // 
+            this.colPrice.HeaderText = "Pricing";
+            this.colPrice.Name = "colPrice";
+            this.colPrice.ReadOnly = true;
+            this.colPrice.Width = 93;
             // 
             // lblStatus
             // 
@@ -223,49 +266,6 @@
             this.btnAdvanced.UseVisualStyleBackColor = true;
             this.btnAdvanced.Click += new System.EventHandler(this.btnAdvanced_Click);
             // 
-            // colTitle
-            // 
-            this.colTitle.HeaderText = "Title";
-            this.colTitle.Name = "colTitle";
-            this.colTitle.ReadOnly = true;
-            this.colTitle.Width = 70;
-            // 
-            // colCondition
-            // 
-            this.colCondition.HeaderText = "Condition";
-            this.colCondition.Name = "colCondition";
-            this.colCondition.ReadOnly = true;
-            this.colCondition.Width = 115;
-            // 
-            // colCount
-            // 
-            this.colCount.HeaderText = "Count";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            this.colCount.Width = 85;
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "ID";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Visible = false;
-            this.colID.Width = 52;
-            // 
-            // colHolds
-            // 
-            this.colHolds.HeaderText = "Holds";
-            this.colHolds.Name = "colHolds";
-            this.colHolds.ReadOnly = true;
-            this.colHolds.Width = 84;
-            // 
-            // colPrice
-            // 
-            this.colPrice.HeaderText = "Pricing";
-            this.colPrice.Name = "colPrice";
-            this.colPrice.ReadOnly = true;
-            this.colPrice.Width = 93;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -287,6 +287,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "frmMain";
             this.Text = " ";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

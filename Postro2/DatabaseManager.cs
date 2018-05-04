@@ -9,15 +9,15 @@ using System.Windows.Forms;
 
 namespace Postro2
 {
-    public static class DatabaseManager
+    public class DatabaseManager
     {
 
-        private static SQLiteConnection connection;
-        public static string DatabaseFilename { get { return _DatabaseFilename; } }
-        private static string _DatabaseFilename;
+        private SQLiteConnection connection;
+        public string DatabaseFilename { get { return _DatabaseFilename; } }
+        private string _DatabaseFilename;
 
         // when creating a db, filename should have the extension ".sqlite"
-        public static void CreateDatabase(string filename)
+        public void CreateDatabase(string filename)
         {
             // load existing database, and if it doesn't exist, create it
             _DatabaseFilename = filename;
@@ -26,7 +26,7 @@ namespace Postro2
             SQLiteConnection.CreateFile(filename);
         }
 
-        public static void Connect(string filename)
+        public void Connect(string filename)
         {
             if (!File.Exists(filename))
             {
@@ -47,14 +47,14 @@ namespace Postro2
 
 
 
-        public static void Command(string command)
+        public void Command(string command)
         {
             if (!CheckDatabaseExists()) return;
 
             (new SQLiteCommand(command, connection)).ExecuteNonQuery();
         }
 
-        private static bool CheckDatabaseExists()
+        private bool CheckDatabaseExists()
         {
             bool exists = File.Exists(DatabaseFilename);
 
@@ -68,7 +68,7 @@ namespace Postro2
         // e.g. 
         // while((reader = CommandWithReader(command)).Read()) Console.Writeline(reader["name"]);
         // http://blog.tigrangasparian.com/2012/02/09/getting-started-with-sqlite-in-c-part-one/
-        public static async Task<System.Data.Common.DbDataReader> CommandWithReader(string command)
+        public async Task<System.Data.Common.DbDataReader> CommandWithReader(string command)
         {
             if (!CheckDatabaseExists()) return null;
             return await (new SQLiteCommand(command, connection)).ExecuteReaderAsync();
@@ -83,7 +83,7 @@ namespace Postro2
         // PROPRIETARY DATABASE MANAGER STUFF INVOLVING POSTERS
         // =======================================================================================================
 
-        public static bool AddPosterToDB(Poster poster)
+        public bool AddPosterToDB(Poster poster)
         {
             try
             {

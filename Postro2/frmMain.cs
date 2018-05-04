@@ -32,6 +32,7 @@ namespace Postro2
 
         DataSet dataset;
         string databasename = "posters.sqlite";
+        string collectorsDB = "collectors.json";
         bool connected = false;
 
         string exmessage = "";
@@ -39,6 +40,8 @@ namespace Postro2
         public frmMain()
         {
             InitializeComponent();
+
+            
 
             dataset = new DataSet("posters");
 
@@ -211,6 +214,11 @@ namespace Postro2
         {
             frmAdvanced adv = new frmAdvanced();
             adv.Show();
+        }
+
+        private async void frmMain_Load(object sender, EventArgs e)
+        {
+            await Updater.CheckVersion(true);
         }
     }
 }

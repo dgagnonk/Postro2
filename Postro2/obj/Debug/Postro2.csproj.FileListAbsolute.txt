@@ -18,3 +18,4 @@ C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.fr
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmInfo.resources
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmAdvanced.resources
 C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\obj\Debug\Postro2.frmDevConsole.resources
+C:\Users\Dan\Google Drive\Programming\Other\Postro2\Postro2\bin\Debug\System.Data.SQLite.dll.config
